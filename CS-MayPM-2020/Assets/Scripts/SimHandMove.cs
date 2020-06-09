@@ -59,6 +59,14 @@ public class SimHandMove : MonoBehaviour
         }
 
         // sprint?!
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            moveSpeed = moveSpeed * 5f;
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            moveSpeed = moveSpeed / 5f;
+        }
 
         #endregion
 
