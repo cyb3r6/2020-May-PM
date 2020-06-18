@@ -15,7 +15,7 @@ public class SimHandMove : MonoBehaviour
     {
         //transform.position = location;
         peterRigidbody = GetComponent<Rigidbody>();
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     
@@ -71,7 +71,7 @@ public class SimHandMove : MonoBehaviour
         #endregion
 
         #region Rotation using Keyboard
-        /*
+        
         // Rotation
         // rotate left
         if (Input.GetKey(KeyCode.Q))
@@ -96,14 +96,14 @@ public class SimHandMove : MonoBehaviour
         {
             transform.Rotate(Vector3.left * Time.deltaTime * turnSpeed, Space.World);
         }
-        */
+        
         #endregion
 
         #region Rotate using Mouse
-
+        /*
         transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * turnSpeed, Space.World);
         transform.Rotate(Vector3.left * Input.GetAxis("Mouse Y") * turnSpeed, Space.Self);
-
+        */
         #endregion
     }
 
