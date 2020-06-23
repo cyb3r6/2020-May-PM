@@ -48,8 +48,8 @@ public class SimHandMove : MonoBehaviour
         // move up
         if (Input.GetKey(KeyCode.Space))
         {
-            //transform.Translate(Vector3.up * Time.deltaTime * moveSpeed);
-            peterRigidbody.AddForce(Vector3.up * jumpForce);
+            transform.Translate(Vector3.up * Time.deltaTime * moveSpeed);
+            //peterRigidbody.AddForce(Vector3.up * jumpForce);
         }
 
         // move down

@@ -12,7 +12,6 @@ public class SimHandAnimator : MonoBehaviour
         simHandAnimator = GetComponentInChildren<Animator>();
     }
 
-    
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse1))
