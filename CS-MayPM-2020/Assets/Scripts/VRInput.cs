@@ -2,15 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// To collect all information about
+/// our controllers!
+/// </summary>
+
 public class VRInput : MonoBehaviour
 {
-    public bool isLeftHand;
+    [SerializeField]
+    [Tooltip("Check if this script is on the left hand")]
+    private bool isLeftHand;
+
     public float gripValue;
     public float triggerValue;
 
     private string gripAxis;
     private string triggerAxis;
-    
+
+    public Vector3 handVelocity;
+    private Vector3 previousPosition;
+
+    public Vector3 handAngularVelocity;
+    private Vector3 previousAngularRotation;
+
     void Awake()
     {
         if (isLeftHand)
@@ -29,5 +43,11 @@ public class VRInput : MonoBehaviour
     {
         gripValue = Input.GetAxis(gripAxis);
         triggerValue = Input.GetAxis(triggerAxis);
+
+        handVelocity = (this.transform.position - previousPosition) / Time.deltaTime;
+        previousPosition = this.transform.position;
+
+        handAngularVelocity = (this.transform.eulerAngles - previousAngularRotation) / Time.deltaTime;
+        previousAngularRotation = this.transform.eulerAngles;
     }
 }

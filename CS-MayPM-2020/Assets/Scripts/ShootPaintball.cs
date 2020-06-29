@@ -11,12 +11,17 @@ public class ShootPaintball : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            GameObject temp = Instantiate(paintballPelletPrefab, spawnPoint.position, spawnPoint.rotation);
-            temp.GetComponent<Rigidbody>().AddForce(temp.transform.forward * shootingForce);
-            shotCounterScript.shotsFired++;
-            Destroy(temp, 3);
-        }
+        //if (Input.GetKeyDown(KeyCode.Mouse0))
+        //{
+            
+        //}
+    }
+
+    public void Interaction()
+    {
+        GameObject temp = Instantiate(paintballPelletPrefab, spawnPoint.position, spawnPoint.rotation);
+        temp.GetComponent<Rigidbody>().AddForce(temp.transform.forward * shootingForce);
+        shotCounterScript.shotsFired++;
+        Destroy(temp, 3);
     }
 }

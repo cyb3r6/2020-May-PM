@@ -54,6 +54,11 @@ public class VRGrab : MonoBehaviour
                 Release();
             }
         }
+
+        if(vrInputController.triggerValue > 0.8f && heldObject)
+        {
+            heldObject.BroadcastMessage("Interaction");
+        }
     }
 
     private void Grab()
@@ -64,6 +69,13 @@ public class VRGrab : MonoBehaviour
 
     private void Release()
     {
+        // get rigidbody
+        Rigidbody rb = heldObject.GetComponent<Rigidbody>();
+
+        // throw
+        rb.velocity = vrInputController.handVelocity;
+        rb.angularVelocity = vrInputController.handAngularVelocity;
+
         // reset heldObject        
         heldObject.GetComponent<Rigidbody>().isKinematic = false;
         heldObject.transform.SetParent(null);

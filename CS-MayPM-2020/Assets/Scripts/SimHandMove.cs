@@ -9,6 +9,7 @@ public class SimHandMove : MonoBehaviour
     public float moveSpeed;
     public float turnSpeed;
     public float jumpForce;
+    public float sprintSpeed;
     private Rigidbody peterRigidbody;
         
     void Start()
@@ -61,11 +62,11 @@ public class SimHandMove : MonoBehaviour
         // sprint?!
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            moveSpeed = moveSpeed * 5f;
+            moveSpeed = moveSpeed * sprintSpeed;
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            moveSpeed = moveSpeed / 5f;
+            moveSpeed = moveSpeed / sprintSpeed;
         }
 
         #endregion

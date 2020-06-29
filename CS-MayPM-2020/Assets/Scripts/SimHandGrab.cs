@@ -10,6 +10,17 @@ public class SimHandGrab : MonoBehaviour
     public bool gripHeld;
     public bool isHeld;
 
+    private Vector3 handVelocity;
+    private Vector3 previousPosition;
+
+    private Vector3 handAngularVelocity;
+    private Vector3 previousAngularRotation;
+
+    public float throwForce;
+
+    [SerializeField]
+    private Transform snapPosition;
+
     private void OnTriggerEnter(Collider other)
     {
         collidingObject = other.gameObject;
@@ -57,20 +68,41 @@ public class SimHandGrab : MonoBehaviour
                 Release();
             }
         }
+
+        if(Input.GetKeyDown(KeyCode.Mouse0) && heldObject)
+        {
+            heldObject.BroadcastMessage("Interaction");
+        }
+
+        handVelocity = (this.transform.position - previousPosition) / Time.deltaTime;
+        previousPosition = this.transform.position;
+
+        handAngularVelocity = (this.transform.eulerAngles - previousAngularRotation) / Time.deltaTime;
+        previousAngularRotation = this.transform.eulerAngles;
     }
 
     private void Grab()
     {
         Debug.Log("Grab has been called");
 
-        heldObject.transform.SetParent(this.transform);
+        heldObject.transform.SetParent(snapPosition);
+        heldObject.transform.localPosition = Vector3.zero;
+
         heldObject.GetComponent<Rigidbody>().isKinematic = true;
+
     }
 
     private void Release()
     {
+        // get the rigidbody
+        Rigidbody rb = heldObject.GetComponent<Rigidbody>();
+
+        // throw
+        rb.velocity = handVelocity * throwForce;
+        rb.angularVelocity = handAngularVelocity * throwForce;
+
         // reset heldObject        
-        heldObject.GetComponent<Rigidbody>().isKinematic = false;
+        rb.isKinematic = false;
         heldObject.transform.SetParent(null);
         heldObject = null;
     }
