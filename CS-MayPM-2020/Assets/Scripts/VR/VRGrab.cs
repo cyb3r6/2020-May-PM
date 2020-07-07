@@ -57,7 +57,7 @@ public class VRGrab : MonoBehaviour
 
         if(vrInputController.triggerValue > 0.8f && heldObject)
         {
-            heldObject.BroadcastMessage("Interaction");
+            //heldObject.BroadcastMessage("Interaction");
         }
     }
 
@@ -65,10 +65,26 @@ public class VRGrab : MonoBehaviour
     {
         heldObject.transform.SetParent(this.transform);
         heldObject.GetComponent<Rigidbody>().isKinematic = true;
+
+        var grabbable = heldObject.GetComponent<GrabbableObjectVR>();
+        if (grabbable)
+        {
+            grabbable.hand = this.gameObject;
+            grabbable.isBeingHeld = true;
+            grabbable.controller = vrInputController;
+        }
     }
 
     private void Release()
     {
+        var grabbable = heldObject.GetComponent<GrabbableObjectVR>();
+        if (grabbable)
+        {
+            grabbable.hand = null;
+            grabbable.isBeingHeld = false;
+            grabbable.controller = null;
+        }
+
         // get rigidbody
         Rigidbody rb = heldObject.GetComponent<Rigidbody>();
 

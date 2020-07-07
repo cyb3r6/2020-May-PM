@@ -71,7 +71,7 @@ public class SimHandGrab : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Mouse0) && heldObject)
         {
-            heldObject.BroadcastMessage("Interaction");
+            //heldObject.BroadcastMessage("Interaction");
         }
 
         handVelocity = (this.transform.position - previousPosition) / Time.deltaTime;
@@ -90,10 +90,30 @@ public class SimHandGrab : MonoBehaviour
 
         heldObject.GetComponent<Rigidbody>().isKinematic = true;
 
+        var grabbable = heldObject.GetComponent<GrabbableObjectSimHand>();
+        if (grabbable)
+        {
+            grabbable.hand = this.gameObject;
+            grabbable.isBeingHeld = true;
+            grabbable.simHandController = this;
+
+
+            heldObject.transform.localPosition += grabbable.grabOffset;
+
+        }
+
     }
 
     private void Release()
     {
+        var grabbable = heldObject.GetComponent<GrabbableObjectSimHand>();
+        if (grabbable)
+        {
+            grabbable.hand = null;
+            grabbable.isBeingHeld = false;
+            grabbable.simHandController = null;
+        }
+
         // get the rigidbody
         Rigidbody rb = heldObject.GetComponent<Rigidbody>();
 
