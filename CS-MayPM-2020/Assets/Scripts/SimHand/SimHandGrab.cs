@@ -88,6 +88,7 @@ public class SimHandGrab : MonoBehaviour
         heldObject.transform.SetParent(snapPosition);
         heldObject.transform.localPosition = Vector3.zero;
 
+        // the object doesn't necessarily need to be isKinematic, this is a preference!
         heldObject.GetComponent<Rigidbody>().isKinematic = true;
 
         var grabbable = heldObject.GetComponent<GrabbableObjectSimHand>();
@@ -97,11 +98,9 @@ public class SimHandGrab : MonoBehaviour
             grabbable.isBeingHeld = true;
             grabbable.simHandController = this;
 
-
             heldObject.transform.localPosition += grabbable.grabOffset;
 
         }
-
     }
 
     private void Release()
