@@ -9,5 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/ARTapToPlace.unity
     guid: a8b4ec2b16482514680e81aaaaa6d0b7
   m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: fcd4129b481515e4ebe9fecda07dc7d1,
+      type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 44282a665aeb6f04d8b98c0c3933cfd8,
       type: 2}

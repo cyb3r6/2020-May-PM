@@ -15,9 +15,11 @@ public class VRInput : MonoBehaviour
 
     public float gripValue;
     public float triggerValue;
+    public bool isThumbstickPressed;
 
     private string gripAxis;
     private string triggerAxis;
+    private string thumbstickButton;
 
     public Vector3 handVelocity;
     private Vector3 previousPosition;
@@ -31,11 +33,13 @@ public class VRInput : MonoBehaviour
         {
             gripAxis = "LeftGrip";
             triggerAxis = "LeftTrigger";
+            thumbstickButton = "LeftThumbstickButton";
         }
         else
         {
             gripAxis = "RightGrip";
             triggerAxis = "RightTrigger";
+            thumbstickButton = "RightThumbstickButton";
         }
     }
         
@@ -43,6 +47,15 @@ public class VRInput : MonoBehaviour
     {
         gripValue = Input.GetAxis(gripAxis);
         triggerValue = Input.GetAxis(triggerAxis);
+
+        if (Input.GetButtonDown(thumbstickButton))
+        {
+            isThumbstickPressed = true;
+        }
+        else if (Input.GetButtonUp(thumbstickButton))
+        {
+            isThumbstickPressed = false;
+        }
 
         handVelocity = (this.transform.position - previousPosition) / Time.deltaTime;
         previousPosition = this.transform.position;

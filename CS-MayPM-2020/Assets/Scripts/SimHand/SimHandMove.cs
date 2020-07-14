@@ -77,25 +77,25 @@ public class SimHandMove : MonoBehaviour
         // rotate left
         if (Input.GetKey(KeyCode.Q))
         {
-            transform.Rotate(Vector3.down* Time.deltaTime * turnSpeed, Space.World);
+            transform.Rotate(Vector3.down* Time.deltaTime * turnSpeed, Space.Self);
         }
 
         // rotate right
         if (Input.GetKey(KeyCode.E))
         {
-            transform.Rotate(Vector3.up * Time.deltaTime * turnSpeed, Space.World);
+            transform.Rotate(Vector3.up * Time.deltaTime * turnSpeed, Space.Self);
         }
 
         // rotate forward
         if (Input.GetKey(KeyCode.Z))
         {
-            transform.Rotate(Vector3.right * Time.deltaTime * turnSpeed, Space.World);
+            transform.Rotate(Vector3.right * Time.deltaTime * turnSpeed, Space.Self);
         }
 
         // rotate backward
         if (Input.GetKey(KeyCode.C))
         {
-            transform.Rotate(Vector3.left * Time.deltaTime * turnSpeed, Space.World);
+            transform.Rotate(Vector3.left * Time.deltaTime * turnSpeed, Space.Self);
         }
         
         #endregion

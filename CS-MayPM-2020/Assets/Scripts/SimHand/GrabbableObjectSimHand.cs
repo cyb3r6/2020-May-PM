@@ -8,4 +8,6 @@ public class GrabbableObjectSimHand : MonoBehaviour
     public bool isBeingHeld;
     public SimHandGrab simHandController;
     public Vector3 grabOffset = Vector3.zero;   // (0, 0, 0)
+
+    // TODO: Rotation offset ;)
 }

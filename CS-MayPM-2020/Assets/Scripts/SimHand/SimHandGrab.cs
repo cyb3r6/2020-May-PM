@@ -9,6 +9,7 @@ public class SimHandGrab : MonoBehaviour
 
     public bool gripHeld;
     public bool isHeld;
+    public bool isTPressed;
 
     private Vector3 handVelocity;
     private Vector3 previousPosition;
@@ -33,12 +34,7 @@ public class SimHandGrab : MonoBehaviour
         {
             collidingObject = null;
         }
-    }
-    
-    void Start()
-    {
-        
-    }
+    }    
     
     void Update()
     {
@@ -69,7 +65,15 @@ public class SimHandGrab : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.Mouse0) && heldObject)
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            isTPressed = true;
+        }
+        else if (Input.GetKeyUp(KeyCode.T))
+        {
+            isTPressed = false;
+        }
+        if (Input.GetKeyDown(KeyCode.Mouse0) && heldObject)
         {
             //heldObject.BroadcastMessage("Interaction");
         }

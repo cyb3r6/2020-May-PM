@@ -18,7 +18,7 @@ public class Paintbrush : GrabbableObjectSimHand
     {
         if (isBeingHeld)
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0) && paintBrushTip.isTouchingCanvas == true)
+            if (Input.GetKeyDown(KeyCode.Mouse0))// && paintBrushTip.isTouchingCanvas == true)
             {
                 Interaction();
             }
