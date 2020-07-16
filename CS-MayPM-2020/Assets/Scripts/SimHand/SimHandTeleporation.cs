@@ -11,12 +11,13 @@ public class SimHandTeleporation : MonoBehaviour
     private bool shouldTeleport;
     private Vector3 hitPosition;
     private SimHandGrab simHandController;
-
+    private float offset;
     
     void Start()
     {
         simHandController = GetComponent<SimHandGrab>();
         teleportLine = GetComponent<LineRenderer>();
+        offset = Offset();
     }
 
     
@@ -40,12 +41,26 @@ public class SimHandTeleporation : MonoBehaviour
             else if(simHandController.isTPressed == false)
             {
                 if(shouldTeleport == true)
-                {
-                    simHand.transform.position = hitPosition;
+                {                    
+                    simHand.transform.position = new Vector3(hitPosition.x, hitPosition.y + offset, hitPosition.z);
                     shouldTeleport = false;
                     teleportLine.enabled = false;
                 }
             }
+        }
+    }
+
+    private float Offset()
+    {
+        RaycastHit offsetHit;
+        if(Physics.Raycast(transform.position, -simHandController.transform.up, out offsetHit))
+        {
+            Vector3 distance = transform.position - offsetHit.point;
+            return distance.y;
+        }
+        else
+        {
+            return default; // 0.0f
         }
     }
 }

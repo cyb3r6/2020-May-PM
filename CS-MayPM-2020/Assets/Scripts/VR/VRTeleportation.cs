@@ -27,7 +27,7 @@ public class VRTeleportation : MonoBehaviour
             if (controller.isThumbstickPressed)
             {
                 RaycastHit hit;
-                if (Physics.Raycast(controller.transform.position, controller.transform.forward, out hit,))
+                if (Physics.Raycast(controller.transform.position, controller.transform.forward, out hit))
                 {
                     // Do the teleporting!
                     hitPosition = hit.point;
