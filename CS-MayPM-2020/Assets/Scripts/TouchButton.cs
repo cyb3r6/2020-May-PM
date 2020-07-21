@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class TouchButton : MonoBehaviour
 {
-    public Transform button, up, down;
+    public Transform button, down;
     public AudioSource audioSource;
 
     // Simplify this script!
+    private Vector3 originalPosition;
+    
     void Start()
     {
-        
+        originalPosition = button.position;     // saving the original position of the button (the up position!)
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,7 +28,7 @@ public class TouchButton : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            button.position = up.position;
+            button.position = originalPosition;
         }
     }
 }

@@ -23,7 +23,7 @@ public class Flashlight : GrabbableObjectSimHand
         }
     }
 
-    private void Interaction()
+    public void Interaction()
     {
         flashlight.enabled = !flashlight.enabled;
     }
