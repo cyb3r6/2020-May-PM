@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Paintable
   - Paint
+  - WreckingCubes
   layers:
   - Default
   - TransparentFX

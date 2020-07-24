@@ -5,7 +5,7 @@ using UnityEngine;
 public class ExplodingCubes : MonoBehaviour
 {
     private List<Rigidbody> cubeRigidbodies = new List<Rigidbody>();
-    
+    public float explosionForce, explosionRadius;
     void Start()
     {
         for(int i = 0; i < this.transform.childCount; i++)
@@ -17,5 +17,9 @@ public class ExplodingCubes : MonoBehaviour
     public void ExplodeCubes()
     {
         // apply explosion force to the cubes!
+        foreach(Rigidbody rb in cubeRigidbodies)
+        {
+            rb.AddExplosionForce(explosionForce, rb.position,explosionRadius);
+        }
     }
 }

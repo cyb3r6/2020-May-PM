@@ -50,7 +50,8 @@ public class SimHandGrab : MonoBehaviour
                     heldObject = collidingObject;
 
                     // do the grabbing!
-                    Grab();
+                    //Grab();
+                    AdvGrab();
                 }
             }
         }
@@ -61,7 +62,8 @@ public class SimHandGrab : MonoBehaviour
 
             if (heldObject)
             {
-                Release();
+                //Release();
+                AdvRelease();
             }
         }
 
@@ -128,5 +130,54 @@ public class SimHandGrab : MonoBehaviour
         rb.isKinematic = false;
         heldObject.transform.SetParent(null);
         heldObject = null;
+    }
+
+    private void AdvGrab()
+    {
+        Debug.Log("AdvGrab has been called");
+
+        // create a fixed joint
+        FixedJoint fj = gameObject.AddComponent<FixedJoint>();  // (typeof(FixedJoint)) as FixedJoint;
+        fj.connectedBody = heldObject.GetComponent<Rigidbody>();
+        fj.breakForce = 2000;
+        fj.breakTorque = 2000;
+
+        var grabbable = heldObject.GetComponent<GrabbableObjectSimHand>();
+        if (grabbable)
+        {
+            grabbable.hand = this.gameObject;
+            grabbable.isBeingHeld = true;
+            grabbable.simHandController = this;
+
+            heldObject.transform.localPosition += grabbable.grabOffset;
+
+        }
+
+    }
+
+    private void AdvRelease()
+    {
+        if (GetComponent<FixedJoint>())
+        {
+            var grabbable = heldObject.GetComponent<GrabbableObjectSimHand>();
+            if (grabbable)
+            {
+                grabbable.hand = null;
+                grabbable.isBeingHeld = false;
+                grabbable.simHandController = null;
+            }
+
+            Destroy(GetComponent<FixedJoint>());
+
+            // get the rigidbody
+            Rigidbody rb = heldObject.GetComponent<Rigidbody>();
+
+            // throw
+            rb.velocity = handVelocity * throwForce;
+            rb.angularVelocity = handAngularVelocity * throwForce;
+
+            // reset heldObject
+            heldObject = null;
+        }
     }
 }
