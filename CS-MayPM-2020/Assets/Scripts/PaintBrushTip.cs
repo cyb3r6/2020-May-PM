@@ -5,7 +5,8 @@ using UnityEngine;
 public class PaintBrushTip : MonoBehaviour
 {
     public Material paint;
-    //public bool isTouchingCanvas;
+    public bool isTouchingCanvas;
+    public Transform canvasTransform;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,19 +17,20 @@ public class PaintBrushTip : MonoBehaviour
         }
     }
 
-    //private void OnTriggerStay(Collider other)
-    //{
-    //    if (other.tag == "Canvas")
-    //    {
-    //        isTouchingCanvas = true;
-    //    }
-    //}
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Paintable")
+        {
+            isTouchingCanvas = true;
+            canvasTransform = other.transform;
+        }
+    }
 
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.tag == "Canvas")
-    //    {
-    //        isTouchingCanvas = false;
-    //    }
-    //}
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Paintable")
+        {
+            isTouchingCanvas = false;
+        }
+    }
 }

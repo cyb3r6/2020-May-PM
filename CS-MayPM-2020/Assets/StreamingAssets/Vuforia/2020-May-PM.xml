@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
   <Tracking>
+    <ImageTarget name="boiler-control-panel" size="0.500000 0.500000" />
     <ImageTarget name="Voltera" size="0.100000 0.022716" />
     <ImageTarget name="Owl" size="0.095000 0.098638" />
   </Tracking>

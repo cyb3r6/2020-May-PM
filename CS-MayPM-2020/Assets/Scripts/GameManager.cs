@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public int numberOfCubesDestroyed;
+    public int numberOfCubesDestroyed = 0;
     
     void Awake()
     {

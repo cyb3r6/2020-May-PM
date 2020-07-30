@@ -21,7 +21,11 @@ public class PaintbrushVR : GrabbableObjectVR
             if (controller.triggerValue > 0.8f && !enable)
             {
                 enable = true;
-                Interaction();
+
+                if(paintBrushTip.isTouchingCanvas == true)
+                {
+                    Interaction();
+                }                
             }
             else if (controller.triggerValue < 0.8f && enable)
             {
@@ -33,7 +37,7 @@ public class PaintbrushVR : GrabbableObjectVR
 
             if (spawnedPaintLine)
             {
-                spawnedPaintLine.transform.position = paintBrushTip.transform.position;
+                spawnedPaintLine.transform.position = new Vector3(paintBrushTip.transform.position.x, paintBrushTip.transform.position.y, paintBrushTip.canvasTransform.position.z);
             }
         }
     }
